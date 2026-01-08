@@ -1,0 +1,9 @@
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+changeps1: true
+ssl_verify: false
+auto_activate_base: false
+channel_priority: strict
+solver: classic
