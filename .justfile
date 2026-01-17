@@ -33,15 +33,15 @@ clean-temp:
 [no-cd]
 fetch:
     git fetch --all
+    
 # Create virtual environment
 pyvenv NAME="venv":
     python3 -m venv {{NAME}}
     @echo "Run: source {{NAME}}/bin/activate"
 
-# Create virtual environment & activate
-pyvenv-shell NAME="venv":
-    python3 -m venv {{NAME}}
-    source {{NAME}}/bin/activate && exec zsh -i
+# Activate virtual environment
+activate-pyvenv NAME="venv":
+    source {{NAME}}/bin/activate
 
 # Build Python package
 build-py:
@@ -108,7 +108,7 @@ doctor:
     which mamba
     which git
 
-whereami:
-    pwd
-    echo "PWD=$PWD"
-    ls -a
+# Check for outdated git repositories
+[no-cd]
+git-outdated:
+    git-status-checker --show-outdated-only || true
